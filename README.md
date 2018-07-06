@@ -1,1 +1,4 @@
 # RandomGame
+
+##Author
+Desgardin Bérenger
