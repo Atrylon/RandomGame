@@ -1,0 +1,14 @@
+{
+  "name": "Game",
+  "authors": [
+    {
+      "name": "Berenger Desgardin",
+      "email": "berengerdesgardin@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Entity\\": "Entity/"
+    }
+  }
+}
