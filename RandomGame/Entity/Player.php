@@ -14,13 +14,12 @@ class Player
     private $hp;
     private $name;
     private $attack;
-    private $dice;
 
     public function __construct($name)
     {
-        $this->hp = 10;
+        $this->hp = 150;
         $this->name = $name;
-        $this->attack = 5;
+        $this->attack = 6;
     }
 
     public function getHp(): int
@@ -52,7 +51,7 @@ class Player
     public function display()
     {
         if($this->isAlive() ===true){
-            echo "Je suis un hero je m'appelle ".$this->name." et j'ai ".$this->hp." pv !";
+            echo "Je suis un hero je m'appelle ".$this->name." et j'ai ".$this->hp." &hearts; points de vie !";
         }
         else{
             echo "J'étais un héro et je suis mort";

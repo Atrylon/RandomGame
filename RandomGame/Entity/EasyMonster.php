@@ -15,8 +15,8 @@ class EasyMonster extends Monster
 
     public function __construct()
     {
-        $hp = parent::getHp();
-        $attack = parent::getAttack();
+        $hp = $this->hp;
+        $attack =  $this->attack;
     }
 
 

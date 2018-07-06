@@ -18,8 +18,10 @@ class Random
         $this->randomDice = rand();
     }
 
-    public function Next(int $j)
+    public function Next($j)
     {
         return $this->randomDice = rand(1, $j);
     }
 }
+
+?>

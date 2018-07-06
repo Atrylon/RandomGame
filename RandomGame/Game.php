@@ -32,49 +32,91 @@ $dice = new Dice;
     <?php
         $player = new Player('Roger');
         $dice = new Dice();
+        $easyMonsterKilled = 0;
+        $hardMonsterKilled = 0;
+        $score = 0;
 
         while ($player->isAlive() === true){
             $rand = rand(1,5);
-            if($rand === 5){
+            if($rand === 5) {
+
                 $monster = new HardMonster();
-                $monsterDice = $dice->rollDice($monster->getAttack());
-                $playerDice = $dice->rollDice($player->getAttack());
 
                 $player->display().'';
-                echo '<br/> Rencontre avec un Boss ! <br />';
-                echo "Le hero frappe fait ".$playerDice.' dégats, le monstre fait '.$monsterDice.' dégats <br />';
-
-
-                $player->damageTaken(5);
                 echo '<br />';
+
+                echo 'RENCONTRE AVEC UN BOSS ! <br />';
+
+                while ($monster->isAlive() === true) {
+
+                    $monsterDice = $dice->rollDice($monster->getAttack());
+                    $playerDice = $dice->rollDice($player->getAttack());
+
+
+                    echo " Le hero frappe fait " . $playerDice . ' &#9876; dégats, le monstre fait ' . $monsterDice . ' &#9876; dégats <br />';
+
+                    if ($playerDice >= $monsterDice) {
+                        $monster->damageTaken($playerDice);
+                        if($monster->getHp() <= 0)
+                        {
+                            echo 'Le monstre subit des dégats ! Il perd ' . $playerDice . ' &hearts; points de vie ! <br />';
+                            echo 'Le monstre est mort ! <br /> <br />';
+                            $hardMonsterKilled ++;
+                            break;
+                        }
+                        else
+                        {
+                            echo 'Le monstre subit des dégats ! Il perd ' . $playerDice . ' &hearts; points de vie ! <br />';
+                        }
+
+                    } else {
+                        echo 'Le hero subit des dégats ! Il perd ' . $monsterDice . ' &hearts; points de vie ! <br />';
+                        $player->damageTaken($monsterDice);
+                    }
+                }
             }
             else{
                 $monster = new EasyMonster();
-                $monsterDice = $dice->rollDice($monster->getAttack());
-                $playerDice = $dice->rollDice($player->getAttack());
 
-                $player->display().' <br />';
+
+                $player->display().'';
+                echo '<br />';
+
+                echo 'RENCONTRE AVEC UN TRASH MOB ! <br />';
 
                 while($monster->isAlive() === true){
-                    echo '<br/> Rencontre avec un trash mob ! <br />';
-                    echo "Le hero frappe fait ".$playerDice.' dégats, le monstre fait '.$monsterDice.' dégats <br />';
 
-                    if ($playerDice >= $monsterDice){
-                        echo 'Le monstre est mort ! <br />';
-                        break;
-                    }
-                    else {
-                        echo 'Le hero subit des dégats ! Il perd '.$monsterDice.' points de vie ! <br />';
+                    $monsterDice = $dice->rollDice($monster->getAttack());
+                    $playerDice = $dice->rollDice($player->getAttack());
+
+                    echo "Le hero frappe fait ".$playerDice.' &#9876; dégats, le monstre fait '.$monsterDice.' &#9876; dégats <br />';
+
+                    if ($playerDice >= $monsterDice) {
+                        $monster->damageTaken($playerDice);
+                        if($monster->getHp() <= 0)
+                        {
+                            echo 'Le monstre subit des dégats ! Il perd ' . $playerDice . ' &hearts; points de vie ! <br />';
+                            echo 'Le monstre est mort ! <br /> <br />';
+                            $easyMonsterKilled ++;
+                            break;
+                        }
+                        else
+                        {
+                            echo 'Le monstre subit des dégats ! Il perd ' . $playerDice . ' &hearts; points de vie ! <br />';
+                        }
+
+                    } else {
+                        echo 'Le hero subit des dégats ! Il perd ' . $monsterDice . ' &hearts; points de vie ! <br />';
                         $player->damageTaken($monsterDice);
                     }
-
-
-                echo '<br />';
                 }
             }
         }
 
         $player->display();
+        echo '<br /> Durant ma vie j\'ai tué '.$easyMonsterKilled.' trash mobs et '.$hardMonsterKilled.' boss. <br />';
+        $score = $easyMonsterKilled+$hardMonsterKilled*2;
+        echo 'J\'ai gagné '.$score.' points !';
     ?>
 
 </body>

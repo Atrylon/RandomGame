@@ -11,9 +11,8 @@ namespace Entity;
 
 Abstract class Monster
 {
-    private $hp = 1;
-    private $attack = 4;
-    private $isAlive;
+    protected $hp = 20;
+    protected $attack = 4;
 
 
     public function isAlive(): bool
@@ -38,6 +37,11 @@ Abstract class Monster
     public function getAttack()
     {
         return $this->attack;
+    }
+
+    public function damageTaken($damage)
+    {
+        $this->hp = $this->hp - $damage;
     }
 
 }
