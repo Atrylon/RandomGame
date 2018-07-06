@@ -1,4 +1,4 @@
 # RandomGame
 
-##Author
+# Author
 Desgardin Bérenger
